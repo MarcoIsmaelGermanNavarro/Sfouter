@@ -1,0 +1,10 @@
+# Archivos de configuración con contraseñas
+.env
+
+# Dependencias de Composer (no las subas, el hosting las instalará)
+vendor/
+
+# Archivos temporales o de logs
+storage/Errores.log
+.DS_Store
+Thumbs.db

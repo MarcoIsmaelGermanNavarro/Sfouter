@@ -1,0 +1,19 @@
+{
+    "name": "marco/sfouter",
+    "description": "Sistema de gestion de scouting para clubes de fútbol",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Sfouter\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marco Ismael German Navarro",
+            "email": "marcoi.gernav@educa.jcyl.es"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
