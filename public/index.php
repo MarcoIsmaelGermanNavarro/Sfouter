@@ -46,7 +46,7 @@ $actionParam = $_GET['action'] ?? Parameters::$ACTION_DEFAULT;
 
 // Construimos el nombre de la clase
 $controllerName = ucfirst($controllerParam) . "Controller";
-$fullControllerName = "Sfouter\\src\\controllers\\" . $controllerName;
+$fullControllerName = "Sfouter\\controllers\\" . $controllerName;
 
 // 8. Despacho (Dispatcher)
 try {
