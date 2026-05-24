@@ -10,18 +10,18 @@ class ConfigBD{
     public static $USER_BD = "root";  // Trabajamos con Root para hacer pruebas      
     public static $PASSWORD_BD = "";        
 }*/
-
 class ConfigBD {
     public static $SERVER_NAME;
+    public static $SERVER_PORT_BD; // <--- FALTABA ESTA
     public static $DB_NAME;
     public static $USER_BD;
     public static $PASSWORD_BD;
 
     public static function init() {
-        // Usamos el operador ?? para que, si no existe la clave, use un valor por defecto
-        self::$SERVER_NAME = $_ENV['DB_HOST'] ?? 'localhost';
-        self::$DB_NAME     = $_ENV['DB_NAME'] ?? 'sfouter_db';
-        self::$USER_BD     = $_ENV['DB_USER'] ?? 'root';
-        self::$PASSWORD_BD = $_ENV['DB_PASS'] ?? '';
+        self::$SERVER_NAME    = $_ENV['DB_HOST'] ?? 'localhost';
+        self::$SERVER_PORT_BD = $_ENV['DB_PORT'] ?? '3306'; // <--- FALTABA ESTA
+        self::$DB_NAME        = $_ENV['DB_NAME'] ?? 'sfouter_db';
+        self::$USER_BD        = $_ENV['DB_USER'] ?? 'root';
+        self::$PASSWORD_BD    = $_ENV['DB_PASS'] ?? '';
     }
 }
