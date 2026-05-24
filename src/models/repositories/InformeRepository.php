@@ -36,7 +36,7 @@ class InformeRepository extends BaseRepository {
     }
 
     // Lo que hacemos es listar, todos, los informes que corresponden a un jugador. 
-    public function listarPorJugador($idJugador, $idUsuario = null) { 
+    public function listarPorJugador($idJugador, ?int $idUsuario = null) { 
         try {
 
 // SQL optimizado (más rápido)
@@ -58,7 +58,7 @@ return array_map([$this, 'hidratar'], $sentencia->fetchAll(PDO::FETCH_ASSOC));
 
     }
 
-    public function getUltimoInforme($idJugador, $idUsuario = null) {
+    public function getUltimoInforme($idJugador, ?int $idUsuario = null) {
 
     try {
 
