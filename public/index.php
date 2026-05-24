@@ -1,24 +1,15 @@
 <?php
 
-echo "Carpeta raíz: " . BASE_PATH . "<br>";
-$files = scandir(BASE_PATH);
-echo "Contenido de la raíz: " . implode(", ", $files);
-die();
 
-// 1. Inicio de sesión único
-if (session_status() === PHP_SESSION_NONE) {
-    session_name("Sfouter_Session");
-    session_start();
-}
-
+// 3. Definición de la ruta base del proyecto
+define('BASE_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 
 // 2. Configuración de errores (Solo para desarrollo, luego se desactiva)
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 
-// 3. Definición de la ruta base del proyecto
-define('BASE_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
+
 
 // 4. Carga del Autoloader de Composer
 $autoloadPath = BASE_PATH . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
@@ -39,6 +30,13 @@ if (file_exists(__DIR__ . '/../.env')) {
 
 // 5. Inicializar configuración dinámica
 Sfouter\config\ConfigBD::init();
+
+// 1. Inicio de sesión único
+if (session_status() === PHP_SESSION_NONE) {
+    session_name("Sfouter_Session");
+    session_start();
+}
+
 
 // 6. Importación de clases necesarias
 use Sfouter\config\Parameters;
