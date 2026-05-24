@@ -4,7 +4,10 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Sfouter\\": "src/"
+            "Sfouter\\": [ 
+                "src/",
+                ""
+            ]
         }
     },
     "authors": [
