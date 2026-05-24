@@ -279,4 +279,3 @@ public function eliminarJugador() {
     exit; 
 }
 }
-?> 

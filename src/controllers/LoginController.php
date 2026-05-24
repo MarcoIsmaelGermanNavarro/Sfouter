@@ -98,4 +98,3 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // Mandarle los datos directamente desde aqui al home controller, o en est caso mandarlo, desde el homecontroller a la vista
 // tner un if o else, dependiedno si accedmos en este caso desde registro o login, o tener dos home una para registro y otra oara login?
 }
-?> 

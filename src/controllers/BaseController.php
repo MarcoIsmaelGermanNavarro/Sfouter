@@ -135,4 +135,3 @@ public function isAdmin(): void {
    ]; 
    }
 }
-?>

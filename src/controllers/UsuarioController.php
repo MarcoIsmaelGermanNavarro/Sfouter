@@ -328,4 +328,3 @@ public function actualizarRol() {
     exit;
 }
 }
-?> 

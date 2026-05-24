@@ -23,4 +23,3 @@ class ErroresController extends BaseController {
             $this->renderizar("error/500", $datos);
         }
 }
-?> 
