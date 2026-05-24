@@ -13,7 +13,7 @@ use PDOException;
 
  public function __construct(?PDO $db = null) {
     // Enlazamos al padre con la tabla y su entidad correspondiente
- parent::__construct($db, "equipo",  EquipoEntity::class);  
+ parent::__construct("equipo", EquipoEntity::class, $db);  
 
  }
 /**
@@ -69,7 +69,7 @@ public function obtenerTodosParaSelect(): array {
 
     // En EquipoRepository.php
 // En EquipoRepository.php
-public function buscarPorId(int $id, int $idUsuario = null) {
+public function buscarPorId(int $id, ?int $idUsuario = null) {
     // 1. Llamamos al padre para obtener el array crudo
     $fila = parent::buscarPorId($id, $idUsuario);
 

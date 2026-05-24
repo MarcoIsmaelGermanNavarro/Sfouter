@@ -14,7 +14,7 @@ class InformeRepository extends BaseRepository {
 
     // ¿En el constructor tambien se puede en este caso poner la tabla informe directamente
     // y le quitamos trabajo al controlador?
-    parent::__construct($db,"informe",InformeEntity::class); 
+    parent::__construct("informe",InformeEntity::class, $db); 
     }
 
     

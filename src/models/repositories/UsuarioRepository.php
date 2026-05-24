@@ -20,7 +20,7 @@ class UsuarioRepository extends BaseRepository {
     ) {
         // ¿No hace faltya meterla en el constructor porque para que, no 
         // si sabemos que va a ser siempre al usurio?
-        parent::__construct( $db,"Usuario", UsuarioEntity::class);
+        parent::__construct("Usuario", UsuarioEntity::class, $db);
     }
 
     private function hidratar(array $d): UsuarioEntity {
@@ -68,7 +68,7 @@ class UsuarioRepository extends BaseRepository {
 
     
 
-    public function actualizarRol($id, $NuevoRol, $idUsuario = null) { 
+    public function actualizarRol($id, $NuevoRol, ?int $idUsuario = null) { 
 
     try {
 
