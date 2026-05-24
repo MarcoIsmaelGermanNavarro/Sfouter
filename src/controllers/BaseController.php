@@ -43,7 +43,7 @@ public function renderizar($vista, $datos = [], $layout = "main") {
 
     if (!file_exists($rutavista)) {
         Errores::log('No se encuentra la vista', ['ruta' => $rutavista]);
-        die("Error: Vista no encontrada en $rutavista");
+       
     }
 
     if ($layout == false) {

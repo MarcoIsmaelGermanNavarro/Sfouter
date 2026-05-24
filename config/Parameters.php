@@ -19,7 +19,7 @@ class Parameters {
     }
 
     public static function getPhysicalPath(): string {
-        // En lugar de hardcodear "/Sfouter/", usamos la raíz del servidor
+        
         return realpath(__DIR__ . '/../') . '/public/uploads/Fotos/'; 
     }
 
