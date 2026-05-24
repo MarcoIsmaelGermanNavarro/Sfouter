@@ -4,6 +4,8 @@
 // se podraian usar los dos, mediante un use, en este caso ya que estan, 
 // en diferentes namespaces?
 namespace Sfouter\src\models\repositories;
+
+use Sfouter\src\models\repositories\BaseRepository;
 use Sfouter\src\models\entities\UsuarioEntity;
 use Sfouter\src\utils\Errores; 
 use PDO; 

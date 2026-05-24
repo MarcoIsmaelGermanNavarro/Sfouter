@@ -1,6 +1,7 @@
 <?php
 
 namespace Sfouter\src\models\repositories;
+use Sfouter\src\models\repositories\BaseRepository;
 use Sfouter\src\models\entities\BaseEntity; 
 use Sfouter\src\models\entities\InformeEntity;
 use Sfouter\src\utils\Errores; 

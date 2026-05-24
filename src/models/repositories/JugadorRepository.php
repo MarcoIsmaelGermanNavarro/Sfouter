@@ -1,6 +1,8 @@
 <?php
 
 namespace Sfouter\src\models\repositories; 
+
+use Sfouter\src\models\repositories\BaseRepository;
 use Sfouter\src\models\entities\JugadorEntity;
 use Sfouter\src\utils\Errores; 
 use PDO; 
