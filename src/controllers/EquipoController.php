@@ -1,12 +1,12 @@
 <?php 
 
-namespace Sfouter\src\controllers;
+namespace Sfouter\controllers;
 
 // Ponemos en este caso los 
-use Sfouter\src\controllers\BaseController;
-use Sfouter\src\models\repositories\EquipoRepository;
-use Sfouter\src\helpers\ValidatorHelper;
-use Sfouter\src\helpers\Session;     
+use Sfouter\controllers\BaseController;
+use Sfouter\models\repositories\EquipoRepository;
+use Sfouter\helpers\ValidatorHelper;
+use Sfouter\helpers\Session;     
 
 class EquipoController extends BaseController {
 

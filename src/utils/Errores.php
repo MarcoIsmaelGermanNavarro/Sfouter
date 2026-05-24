@@ -1,6 +1,6 @@
 <?php
 
-namespace Sfouter\src\utils; 
+namespace Sfouter\utils; 
 
 class Errores {
 

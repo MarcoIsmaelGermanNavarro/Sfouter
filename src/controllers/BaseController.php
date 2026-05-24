@@ -1,11 +1,11 @@
 <?php
 
-namespace Sfouter\src\controllers;
+namespace Sfouter\controllers;
 use Sfouter\config\Parameters;
-use Sfouter\src\utils\Errores;
-use Sfouter\src\models\repositories\BaseRepository;
-use Sfouter\src\database\ConexionSfouter;
-use Sfouter\src\helpers\Session;
+use Sfouter\utils\Errores;
+use Sfouter\models\repositories\BaseRepository;
+use Sfouter\database\ConexionSfouter;
+use Sfouter\helpers\Session;
 use PDO; 
 
 

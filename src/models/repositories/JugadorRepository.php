@@ -1,10 +1,10 @@
 <?php
 
-namespace Sfouter\src\models\repositories; 
+namespace Sfouter\models\repositories; 
 
-use Sfouter\src\models\repositories\BaseRepository;
-use Sfouter\src\models\entities\JugadorEntity;
-use Sfouter\src\utils\Errores; 
+use Sfouter\models\repositories\BaseRepository;
+use Sfouter\models\entities\JugadorEntity;
+use Sfouter\utils\Errores; 
 use PDO; 
 use PDOException;  
 

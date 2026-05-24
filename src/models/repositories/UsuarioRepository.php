@@ -3,11 +3,11 @@
 // es la carpeta que contiene en estc aso el reopositories, esd ecir que si hubietra otra carpeta, o archivo von este nombre, 
 // se podraian usar los dos, mediante un use, en este caso ya que estan, 
 // en diferentes namespaces?
-namespace Sfouter\src\models\repositories;
+namespace Sfouter\models\repositories;
 
-use Sfouter\src\models\repositories\BaseRepository;
-use Sfouter\src\models\entities\UsuarioEntity;
-use Sfouter\src\utils\Errores; 
+use Sfouter\models\repositories\BaseRepository;
+use Sfouter\models\entities\UsuarioEntity;
+use Sfouter\utils\Errores; 
 use PDO; 
 use PDOException;  
 

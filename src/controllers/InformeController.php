@@ -1,11 +1,11 @@
 <?php
-namespace Sfouter\src\controllers;
-use Sfouter\src\models\entities\InformeEntity;
-use Sfouter\src\controllers\BaseController;
-use Sfouter\src\models\repositories\InformeRepository;
-use Sfouter\src\models\repositories\JugadorRepository;
-use Sfouter\src\models\repositories\EquipoRepository;
-use Sfouter\src\helpers\ValidatorHelper;
+namespace Sfouter\controllers;
+use Sfouter\models\entities\InformeEntity;
+use Sfouter\controllers\BaseController;
+use Sfouter\models\repositories\InformeRepository;
+use Sfouter\models\repositories\JugadorRepository;
+use Sfouter\models\repositories\EquipoRepository;
+use Sfouter\helpers\ValidatorHelper;
 
 
 

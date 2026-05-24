@@ -1,10 +1,10 @@
 <?php
 // Siempre recuerda usar "\", estas barras
-namespace Sfouter\src\controllers;
-use Sfouter\src\controllers\BaseController;
-use Sfouter\src\models\repositories\UsuarioRepository;
-use Sfouter\src\helpers\ValidatorHelper;
-use Sfouter\src\helpers\Session;                     
+namespace Sfouter\controllers;
+use Sfouter\controllers\BaseController;
+use Sfouter\models\repositories\UsuarioRepository;
+use Sfouter\helpers\ValidatorHelper;
+use Sfouter\helpers\Session;                     
 
 
 

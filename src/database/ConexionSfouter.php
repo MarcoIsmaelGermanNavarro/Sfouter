@@ -1,5 +1,5 @@
 <?php
-    namespace Sfouter\src\database; 
+    namespace Sfouter\database; 
     use Sfouter\config\ConfigBD; 
 
 	class ConexionSfouter {

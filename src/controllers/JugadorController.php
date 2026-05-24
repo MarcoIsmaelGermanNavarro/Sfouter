@@ -1,12 +1,12 @@
 <?php
 
 // Importamos en este caso tanto Controllers, como el repositorio de Jugador y el baseController
-namespace Sfouter\src\controllers;
-use Sfouter\src\models\repositories\JugadorRepository;
-use Sfouter\src\controllers\BaseController;
-use Sfouter\src\helpers\ValidatorHelper;
-use Sfouter\src\helpers\Session;
-use Sfouter\src\models\repositories\InformeRepository;
+namespace Sfouter\controllers;
+use Sfouter\models\repositories\JugadorRepository;
+use Sfouter\controllers\BaseController;
+use Sfouter\helpers\ValidatorHelper;
+use Sfouter\helpers\Session;
+use Sfouter\models\repositories\InformeRepository;
 use Sfouter\config\Parameters;
 
 class JugadorController  extends BaseController { 

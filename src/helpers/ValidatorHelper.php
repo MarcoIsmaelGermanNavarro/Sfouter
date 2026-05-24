@@ -1,6 +1,6 @@
 <?php
 
-namespace Sfouter\src\helpers;
+namespace Sfouter\helpers;
 // No necesita instanciarse, la invocas directamente en los controaldsores enates de mandar
 // lod daros al Repositorio o a la entidad
 

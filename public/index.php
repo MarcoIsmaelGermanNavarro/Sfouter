@@ -31,8 +31,8 @@ Sfouter\config\ConfigBD::init();
 
 // 5. Importación de clases necesarias
 use Sfouter\config\Parameters;
-use Sfouter\src\controllers\ErroresController;
-use Sfouter\src\utils\Errores;
+use Sfouter\controllers\ErroresController;
+use Sfouter\utils\Errores;
 
 // 6. Inicio de sesión único
 if (session_status() === PHP_SESSION_NONE) {

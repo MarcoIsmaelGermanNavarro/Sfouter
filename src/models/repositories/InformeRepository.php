@@ -1,10 +1,10 @@
 <?php
 
-namespace Sfouter\src\models\repositories;
-use Sfouter\src\models\repositories\BaseRepository;
-use Sfouter\src\models\entities\BaseEntity; 
-use Sfouter\src\models\entities\InformeEntity;
-use Sfouter\src\utils\Errores; 
+namespace Sfouter\models\repositories;
+use Sfouter\models\repositories\BaseRepository;
+use Sfouter\models\entities\BaseEntity; 
+use Sfouter\models\entities\InformeEntity;
+use Sfouter\utils\Errores; 
 use PDO; 
 use PDOException; // Importante en este caso importar la excepcion
 

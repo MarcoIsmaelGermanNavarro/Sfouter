@@ -1,5 +1,5 @@
 <?php
-namespace Sfouter\src\controllers;
+namespace Sfouter\controllers;
 
 
 class ErroresController extends BaseController {

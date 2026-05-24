@@ -1,6 +1,6 @@
 <?php
 
-namespace Sfouter\src\helpers;
+namespace Sfouter\helpers;
 
 // La funcion de este archivo es la de en este caso, todas las confuiguaraciones, de las 
 // Sesiones, en este caso centralizarlas. 

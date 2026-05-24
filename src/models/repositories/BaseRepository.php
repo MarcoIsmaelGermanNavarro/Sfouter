@@ -1,10 +1,10 @@
 <?php
 
-namespace Sfouter\src\models\repositories;
+namespace Sfouter\models\repositories;
 
 // Al usar en este caso Use, ten cuidado, porque puedes tener problemas a la hora de Conectar
-use Sfouter\src\database\ConexionSfouter; // <-- Añade esto arriba. 
-use Sfouter\src\utils\Errores;   
+use Sfouter\database\ConexionSfouter; // <-- Añade esto arriba. 
+use Sfouter\utils\Errores;   
 use PDO; 
 use PDOException; 
 

@@ -2,15 +2,15 @@
 
 // Es la prueba para ver si funciona todo de manera correcta. 
 
-namespace Sfouter\src\controllers;
+namespace Sfouter\controllers;
 
 // El use para saber donde esta el padre, para no poner toda la ruta 
 // en el extends. 
-use Sfouter\src\controllers\BaseController;
-use Sfouter\src\models\repositories\JugadorRepository;
+use Sfouter\controllers\BaseController;
+use Sfouter\models\repositories\JugadorRepository;
 /* Las vistas no son clases no pueden usar Use, ya el padre se encarga en este caso de 
 de asignarle las rutas de la vista a la que tiene en este caso que acceder. 
-use Sfouter\src\views\home; 
+use Sfouter\views\home; 
 */
 class HomeController extends BaseController {
 

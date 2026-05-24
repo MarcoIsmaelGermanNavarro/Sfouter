@@ -1,6 +1,6 @@
 <?php
 
-namespace Sfouter\src\models\entities;
+namespace Sfouter\models\entities;
 
 use DateTime;
 

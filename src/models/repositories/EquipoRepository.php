@@ -1,10 +1,10 @@
 <?php
 
-namespace Sfouter\src\models\repositories;
+namespace Sfouter\models\repositories;
 
-use Sfouter\src\utils\Errores; 
-use Sfouter\src\models\entities\EquipoEntity; 
-use Sfouter\src\models\repositories\BaseRepository; 
+use Sfouter\utils\Errores; 
+use Sfouter\models\entities\EquipoEntity; 
+use Sfouter\models\repositories\BaseRepository; 
 use PDO; 
 use PDOException; 
 
