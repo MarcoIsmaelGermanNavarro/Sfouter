@@ -12,12 +12,11 @@ class Parameters {
     // Ajustamos la URL base para que sea relativa
     public static $BASE_URL = "/"; 
 
-    public static function viewsPath(): string {
-        // Obtenemos la ruta absoluta de la raíz del proyecto
-        // Si index está en public, la raíz es /var/www/html/
-        return realpath(__DIR__ . '/../../') . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
-    }
-
+   public static function viewsPath(): string {
+    // Si este archivo está en src/config/, para llegar a views subimos 2 niveles
+    // y luego entramos en la carpeta views.
+    return realpath(__DIR__ . '/../../') . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
+}
     public static function getPhysicalPath(): string {
         
         return realpath(__DIR__ . '/../') . '/public/uploads/Fotos/'; 
