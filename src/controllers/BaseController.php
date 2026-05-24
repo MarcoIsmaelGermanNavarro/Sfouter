@@ -39,23 +39,30 @@ public function renderizar($vista, $datos = [], $layout = "main") {
     $datos['csrf_token'] = $_SESSION['csrf_token']; 
     // Extreamos los datos
     extract($datos);
+    $basePath = Parameters::viewsPath(); // Esto debe ser /var/www/html/views/
     $rutavista = Parameters::viewsPath() . $vista . ".php"; 
 
     if (!file_exists($rutavista)) {
-        Errores::log('No se encuentra la vista', ['ruta' => $rutavista]);
-       
+        $msg = "ERROR VISTA: No existe -> " . $rutavista . "\n";
+        $msg .= "Ruta base calculada: " . $basePath . "\n";
+        $msg .= "Directorio actual (cwd): " . getcwd() . "\n";
+
+        $parent = dirname($rutavista);
+        if (is_dir($parent)) {
+            $msg .= "Archivos encontrados en " . $parent . ": " . implode(", ", scandir($parent));
+        } else {
+            $msg .= "El directorio padre " . $parent . " NO EXISTE.";
+        }
+        
+        die("<pre>$msg</pre>"); // Esto te mostrará la verdad absoluta en pantalla
     }
+       
+    
 
     if ($layout == false) {
         // Si no hay layout, cargamos la vista directamente
         // DEBUG: Ver qué contiene el sistema de archivos
-$ruta_debug = dirname($rutavista); 
-if (is_dir($ruta_debug)) {
-    $archivos = scandir($ruta_debug);
-    error_log("DEBUG: Archivos encontrados en " . $ruta_debug . ": " . implode(", ", $archivos));
-} else {
-    error_log("DEBUG: EL DIRECTORIO NO EXISTE: " . $ruta_debug);
-}
+
         require $rutavista; 
     } else { 
         // 1. CAPTURAMOS la vista en una variable llamada $contenido
