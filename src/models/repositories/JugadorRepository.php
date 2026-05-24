@@ -16,7 +16,7 @@ class JugadorRepository extends BaseRepository {
         // 1. La conexión $db
         // 2. El nombre de la tabla 'jugadores'
         // 3. El nombre de la clase Entidad (Namespace completo)
-        parent::__construct($db, 'JUGADOR', JugadorEntity::class);
+        parent::__construct($db, "Jugador", JugadorEntity::class);
     }
 
     private function hidratar(array $d): JugadorEntity {
