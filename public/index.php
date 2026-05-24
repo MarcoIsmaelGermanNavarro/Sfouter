@@ -9,8 +9,6 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 
-
-
 // 4. Carga del Autoloader de Composer
 $autoloadPath = BASE_PATH . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
@@ -38,6 +36,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_name("Sfouter_Session");
     session_start();
 }
+
 
 
 // 6. Importación de clases necesarias

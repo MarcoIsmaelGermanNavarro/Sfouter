@@ -42,21 +42,13 @@ public function renderizar($vista, $datos = [], $layout = "main") {
     $basePath = Parameters::viewsPath(); // Esto debe ser /var/www/html/views/
     $rutavista = Parameters::viewsPath() . $vista . ".php"; 
 
-    if (!file_exists($rutavista)) {
-        $msg = "ERROR VISTA: No existe -> " . $rutavista . "\n";
-        $msg .= "Ruta base calculada: " . $basePath . "\n";
-        $msg .= "Directorio actual (cwd): " . getcwd() . "\n";
 
-        $parent = dirname($rutavista);
-        if (is_dir($parent)) {
-            $msg .= "Archivos encontrados en " . $parent . ": " . implode(", ", scandir($parent));
-        } else {
-            $msg .= "El directorio padre " . $parent . " NO EXISTE.";
-        }
-        
-        die("<pre>$msg</pre>"); // Esto te mostrará la verdad absoluta en pantalla
+// CAMBIA ESTO EN RENDERIZAR:
+    if (!file_exists($rutavista)) {
+    // En lugar de die, lanza una excepción que tu index.php ya sabe manejar
+        throw new \Exception("La vista no existe: " . $rutavista);
     }
-       
+
     
 
     if ($layout == false) {
@@ -144,4 +136,5 @@ public function isAdmin(): void {
    }
 
  }
-?> 
+
+ 
