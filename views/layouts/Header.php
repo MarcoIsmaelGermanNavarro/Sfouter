@@ -12,7 +12,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
     <div class="container">
         <a class="navbar-brand" href="index.php">
-            <img src="<?= \Sfouter\config\Parameters::$BASE_URL ?>public/assets/img/Logo.png" 
+            <img src="<?= \Sfouter\config\Parameters::$BASE_URL ?>assets/img/Logo.png" 
                  alt="Sfouter Logo" style="height: 40px; width: auto;">
         </a>
         

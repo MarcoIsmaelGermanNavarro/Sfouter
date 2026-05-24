@@ -4,7 +4,7 @@
             
             <div class="col-12 col-md-4 text-center text-md-start">
                         <a class="navbar-brand" href="index.php">
-                            <img src="<?= \Sfouter\config\Parameters::$BASE_URL ?>public/assets/img/Logo.png" 
+                            <img src="<?= \Sfouter\config\Parameters::$BASE_URL ?>assets/img/Logo.png" 
                             alt="Sfouter Logo" 
                             style="height: 80px; width: auto;">
                      </a>
