@@ -78,8 +78,10 @@ try {
         http_response_code(500);
         
         // Aquí llamas a tu vista personalizada de error 500
+        /*
         $errorController = new ErroresController();
         $errorController->error500(); // Asegúrate de tener este método
+        */
     }
     exit;
 }
