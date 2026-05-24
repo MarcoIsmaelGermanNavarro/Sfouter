@@ -1,13 +1,23 @@
 FROM php:8.4-apache
 
-# Instalar extensiones necesarias para bases de datos
+# 1. Instalar Composer (necesario para bajar las librerías)
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# 2. Instalar extensiones necesarias para bases de datos
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Habilitar mod_rewrite para tu .htaccess
+# 3. Habilitar mod_rewrite
 RUN a2enmod rewrite
 
-# Copiar el código al contenedor
-COPY . /var/www/html/
+# 4. Copiar los archivos de configuración de composer primero (para aprovechar caché)
+COPY composer.json composer.lock* /var/www/html/
 
-# Asegurar que el DocumentRoot apunte a public
+# 5. Instalar las dependencias
+WORKDIR /var/www/html
+RUN composer install --no-dev --optimize-autoloader
+
+# 6. Copiar el resto del código
+COPY . .
+
+# 7. Configurar Apache
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
