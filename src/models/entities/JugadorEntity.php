@@ -36,11 +36,3 @@ public function getId(): ?int { return $this->id; }
 
 public function getFechaNac(): ?DateTime { return $this->fechaNac; }
 }
-
-
-
-
-
-
-
-?>

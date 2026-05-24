@@ -220,5 +220,3 @@ public function cargarTodo(?int $userId = null): array {
     return array_map([$this, 'hidratar'], $filas); 
 }
 }
-         
-?>

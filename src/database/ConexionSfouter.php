@@ -14,4 +14,3 @@ class ConexionSfouter {
         return $conexion;
     }
 }
-?> 

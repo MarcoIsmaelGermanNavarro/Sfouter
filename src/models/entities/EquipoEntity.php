@@ -13,4 +13,3 @@ public function getid() {return $this -> id; }
 public function getNombre() {return $this -> nombre; }
 
 }
-?> 

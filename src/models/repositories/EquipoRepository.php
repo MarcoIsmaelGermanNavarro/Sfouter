@@ -82,6 +82,4 @@ public function buscarPorId(int $id, ?int $idUsuario = null) {
     return $this->hidratar($fila);
 }
  }
-
-
-?> 
+ 

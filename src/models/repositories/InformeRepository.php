@@ -216,6 +216,3 @@ $consulta = "Select i.*, j.nombre as nombre_jugador
 
 }
 }
-
-
-?> 

@@ -28,7 +28,3 @@ class Parameters {
         return "/uploads/Fotos/"; 
     }
 }
-
-
-
-?> 
