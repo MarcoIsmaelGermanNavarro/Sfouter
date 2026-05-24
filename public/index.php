@@ -6,6 +6,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+echo "<h1>Estamos en el index.php</h1>"; //
+
 // 2. Definición de la ruta base del proyecto
 define('BASE_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 
