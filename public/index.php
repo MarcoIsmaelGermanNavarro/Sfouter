@@ -52,36 +52,25 @@ $fullControllerName = "Sfouter\\controllers\\" . $controllerName;
 
 // 8. Despacho (Dispatcher)
 try {
+    echo "DEBUG: Buscando clase $fullControllerName...<br>"; // Línea nueva
+    
     if (class_exists($fullControllerName)) {
+        echo "DEBUG: La clase existe. Instanciando...<br>"; // Línea nueva
         $controller = new $fullControllerName();
+        
+        echo "DEBUG: Instancia creada. Buscando método $actionParam...<br>"; // Línea nueva
         if (method_exists($controller, $actionParam)) {
             $controller->$actionParam();
         } else {
-            // Error de lógica: la acción no existe
-            throw new Exception("La acción '$actionParam' no existe", 404);
+            throw new Exception("La acción '$actionParam' no existe en $fullControllerName", 404);
         }
     } else {
-        // Error de lógica: el controlador no existe
-        throw new Exception("El controlador $fullControllerName no existe", 404);
+        throw new Exception("El controlador '$fullControllerName' no existe. Verifica el Namespace y el archivo.", 404);
     }
-} catch (Exception $e) {
-    // 1. Logueamos el error real en tu archivo Errores.log
-    Errores::log($e->getMessage() . " | Trace: " . $e->getTraceAsString());
-
-    // 2. Dependiendo del código, mostramos una vista u otra
-    if ($e->getCode() === 404) {
-        http_response_code(404);
-        $errorController = new ErroresController();
-        $errorController->error404();
-    } else {
-        // Cualquier otro error es un 500 (Error Interno)
-        http_response_code(500);
-        
-        // Aquí llamas a tu vista personalizada de error 500
-        /*
-        $errorController = new ErroresController();
-        $errorController->error500(); // Asegúrate de tener este método
-        */
-    }
+} catch (Throwable $e) { // Cambiamos Exception por Throwable para capturar errores de tipo también
+    echo "<h1>ERROR FATAL EN DISPATCHER</h1>";
+    echo "Mensaje: " . $e->getMessage() . "<br>";
+    echo "Archivo: " . $e->getFile() . " en línea " . $e->getLine() . "<br>";
+    echo "<pre>" . $e->getTraceAsString() . "</pre>";
     exit;
 }
