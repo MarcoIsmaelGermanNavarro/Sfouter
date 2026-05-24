@@ -18,9 +18,13 @@ if (!file_exists($autoloadPath)) {
 
 require_once $autoloadPath;
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
-
+// CÓDIGO CORREGIDO (EL QUE NO FALLA)
+if (file_exists(__DIR__ . '/../.env')) {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
+}
+// Si el archivo no existe, no hace nada porque las variables 
+// ya están inyectadas automáticamente por Railway en el sistema.
 
 // 4. Inicializar configuración dinámica
 Sfouter\config\ConfigBD::init();
