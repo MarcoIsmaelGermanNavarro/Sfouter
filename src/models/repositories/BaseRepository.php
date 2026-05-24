@@ -10,6 +10,7 @@ use PDOException;
 
 abstract class BaseRepository {
 
+
     protected PDO $db; 
     protected string $entidad; 
     protected string  $tabla; 

@@ -279,7 +279,5 @@ public function misInformes() {
         exit;
     }
 }
-
-
-
 }
+?>

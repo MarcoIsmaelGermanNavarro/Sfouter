@@ -278,12 +278,5 @@ public function eliminarJugador() {
     header("Location: index.php?controller=Jugador&action=listarJugadores");
     exit; 
 }
-
-
 }
-
-
-
-
-
 ?> 

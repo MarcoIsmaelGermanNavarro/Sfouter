@@ -92,11 +92,5 @@ public function guardar() {
     }
     exit; 
 }
-
 }
-
-
-
-
-
 ?> 

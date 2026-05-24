@@ -36,11 +36,5 @@ public function index() {
 
     $this->renderizar('home/Home', $datos); 
 }
-
-
-
 }
-
-
-
 ?> 

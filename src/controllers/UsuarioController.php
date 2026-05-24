@@ -1,13 +1,13 @@
 <?php
 namespace Sfouter\controllers; 
 
-use Sfouter\models\entities\UsuarioEntity;
-use Sfouter\controllers\BaseController;
-use Sfouter\models\repositories\UsuarioRepository;
-use Sfouter\models\repositories\JugadorRepository;
-use Sfouter\models\repositories\InformeRepository;
-use Sfouter\helpers\ValidatorHelper;
-use Sfouter\helpers\Session;
+use Sfouter\src\models\entities\UsuarioEntity;
+use Sfouter\src\controllers\BaseController;
+use Sfouter\src\models\repositories\UsuarioRepository;
+use Sfouter\src\models\repositories\JugadorRepository;
+use Sfouter\src\models\repositories\InformeRepository;
+use Sfouter\src\helpers\ValidatorHelper;
+use Sfouter\src\helpers\Session;
 
 class UsuarioController extends BaseController {
 
@@ -328,5 +328,4 @@ public function actualizarRol() {
     exit;
 }
 }
-
 ?> 

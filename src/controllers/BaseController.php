@@ -134,7 +134,5 @@ public function isAdmin(): void {
    'tipo' => $categoria 
    ]; 
    }
-
- }
-
- 
+}
+?>
