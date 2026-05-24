@@ -2,8 +2,8 @@
 
 
 // 1. Configuración de errores (Solo para desarrollo, luego se desactiva)
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // 2. Definición de la ruta base del proyecto
