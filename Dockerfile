@@ -1,23 +1,29 @@
 FROM php:8.4-apache
 
-# 1. Instalar Composer (necesario para bajar las librerías)
+# 1. Instalar dependencias del sistema necesarias para Composer y PHP
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libzip-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# 2. Instalar extensiones de PHP necesarias
+# (Incluimos zip porque el error mencionaba que la extensión zip también faltaba)
+RUN docker-php-ext-install pdo pdo_mysql zip
+
+# 3. Instalar Composer desde su imagen oficial
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# 2. Instalar extensiones necesarias para bases de datos
-RUN docker-php-ext-install pdo pdo_mysql
-
-# 3. Habilitar mod_rewrite
+# 4. Habilitar mod_rewrite para Apache
 RUN a2enmod rewrite
 
-# 4. Copiar los archivos de configuración de composer primero (para aprovechar caché)
-COPY composer.json composer.lock* /var/www/html/
+# 5. Configurar Apache para que la raíz sea /var/www/html/public
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 
-# 5. Instalar las dependencias
+# 6. Copiar código y ejecutar instalación
 WORKDIR /var/www/html
+COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
-# 6. Copiar el resto del código
-COPY . .
-
-# 7. Configurar Apache
-RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+# 7. Permisos
+RUN chown -R www-data:www-data /var/www/html
