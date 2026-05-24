@@ -15,7 +15,7 @@ abstract class BaseRepository {
     protected string  $tabla; 
     
     // Si la conexion es nula se ejecuta lo que hay abajo
-    public function __construct(?PDO $db = null, String $tabla, string $entidad) {
+    public function __construct(String $tabla, string $entidad, ?PDO $db = null) {
     $this -> tabla = $tabla;
     $this -> entidad = $entidad; 
     // Si no me pasan conexión, la pido a mi clase ConexionSfouter
@@ -78,7 +78,7 @@ public function EliminarFila(int $id, ?int $idUsuario = null) {
 }
 
 
-    public function insertar(array $datos, int $idUsuario = null) {
+    public function insertar(array $datos, ?int $idUsuario = null) {
 
         try {
 
