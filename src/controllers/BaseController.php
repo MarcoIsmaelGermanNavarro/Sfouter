@@ -48,6 +48,14 @@ public function renderizar($vista, $datos = [], $layout = "main") {
 
     if ($layout == false) {
         // Si no hay layout, cargamos la vista directamente
+        // DEBUG: Ver qué contiene el sistema de archivos
+$ruta_debug = dirname($rutavista); 
+if (is_dir($ruta_debug)) {
+    $archivos = scandir($ruta_debug);
+    error_log("DEBUG: Archivos encontrados en " . $ruta_debug . ": " . implode(", ", $archivos));
+} else {
+    error_log("DEBUG: EL DIRECTORIO NO EXISTE: " . $ruta_debug);
+}
         require $rutavista; 
     } else { 
         // 1. CAPTURAMOS la vista en una variable llamada $contenido
