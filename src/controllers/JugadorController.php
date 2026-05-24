@@ -204,7 +204,7 @@ public function listarJugadores() {
         $titulo = "Lista global de Jugadores"; 
     }
 
-    $this->renderizar("jugador/VerJugador", [
+    $this->renderizar("jugador/Verjugador", [
         'titulo' => $titulo,
         'datos' => $lista
     ]);
