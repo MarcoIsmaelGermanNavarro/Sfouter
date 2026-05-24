@@ -20,7 +20,7 @@ class UsuarioRepository extends BaseRepository {
     ) {
         // ¿No hace faltya meterla en el constructor porque para que, no 
         // si sabemos que va a ser siempre al usurio?
-        parent::__construct("Usuario", UsuarioEntity::class, $db);
+        parent::__construct("usuario", UsuarioEntity::class, $db);
     }
 
     private function hidratar(array $d): UsuarioEntity {
