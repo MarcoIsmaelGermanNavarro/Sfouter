@@ -31,6 +31,14 @@ if (file_exists(__DIR__ . '/../.env')) {
 // 5. Inicializar configuración dinámica
 Sfouter\config\ConfigBD::init();
 
+// DEBUG: Verifica qué valores tomó la configuración
+echo "<pre>";
+echo "DB_HOST: " . \Sfouter\config\ConfigBD::$SERVER_NAME . "\n";
+echo "DB_NAME: " . \Sfouter\config\ConfigBD::$DB_NAME . "\n";
+echo "DB_USER: " . \Sfouter\config\ConfigBD::$USER_BD . "\n";
+echo "</pre>";
+die("Fin del debug"); // Detenemos la ejecución para leer esto
+
 // 1. Inicio de sesión único
 if (session_status() === PHP_SESSION_NONE) {
     session_name("Sfouter_Session");
