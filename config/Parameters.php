@@ -12,11 +12,13 @@ class Parameters {
     // Ajustamos la URL base para que sea relativa
     public static $BASE_URL = "/"; 
 
-   public static function viewsPath(): string {
-    // Si este archivo está en src/config/, para llegar a views subimos 2 niveles
-    // y luego entramos en la carpeta views.
-    return realpath(__DIR__ . '/../../') . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
+    public static function viewsPath(): string {
+    // BASE_PATH ya fue definida en index.php como /var/www/html/
+    // Así que solo tenemos que concatenar la carpeta views
+    return BASE_PATH . "views" . DIRECTORY_SEPARATOR;
 }
+
+
     public static function getPhysicalPath(): string {
         
         return realpath(__DIR__ . '/../') . '/public/uploads/Fotos/'; 

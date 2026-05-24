@@ -53,9 +53,7 @@ public function renderizar($vista, $datos = [], $layout = "main") {
         // 1. CAPTURAMOS la vista en una variable llamada $contenido
         ob_start(); // Abrimos el grifo del búfer
         // En BaseController.php, antes del require:
-if (!is_dir(dirname(Parameters::viewsPath()))) {
-    die("DEBUG: La carpeta 'views' no existe en: " . Parameters::viewsPath());
-}
+
         require $rutavista;
         $contenido = ob_get_clean(); // Cerramos el grifo y guardamos el agua en $contenido, de esta manera despues lo 
         // volcamos en este caso con Requiere_once. 

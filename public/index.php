@@ -1,5 +1,10 @@
 <?php
 
+echo "Carpeta raíz: " . BASE_PATH . "<br>";
+$files = scandir(BASE_PATH);
+echo "Contenido de la raíz: " . implode(", ", $files);
+die();
+
 // 1. Inicio de sesión único
 if (session_status() === PHP_SESSION_NONE) {
     session_name("Sfouter_Session");
