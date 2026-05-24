@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sfouter - Scouting Profesional</title>
-    <link href="<?= \Sfouter\config\Parameters::$BASE_URL ?>public/assets/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="<?= \Sfouter\config\Parameters::$BASE_URL ?>public/assets/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <link href="<?= \Sfouter\config\Parameters::$BASE_URL ?>assets/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="<?= \Sfouter\config\Parameters::$BASE_URL ?>assets/bootstrap/bootstrap.bundle.min.js" defer></script>
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
 
