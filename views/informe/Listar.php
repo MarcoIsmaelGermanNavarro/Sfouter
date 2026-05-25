@@ -69,7 +69,7 @@
 <?php endif; ?>
 
 <div class="d-flex justify-content-start mt-3">
-    <a href="index.php?controller=Usuario&action=dashboard" class="btn btn-light border fw-medium px-4">
+    <a href="index.php?controller=Usuario&action=mostrarDashboard" class="btn btn-light border fw-medium px-4">
         ⬅ Volver al Panel
     </a>
 </div>
