@@ -182,7 +182,7 @@ public function VerDetalle() {
                 ];
 
                 // Renderizamos la vista de detalle
-                $this->renderizar("informe/verDetalle", $datos);
+                $this->renderizar("informe/VerDetalle", $datos);
                 return; // Importante: Salimos de la función para que no ejecute el header de abajo
             } else {
                 $_SESSION['Error'] = "No se encontró el informe o no tienes permiso.";
