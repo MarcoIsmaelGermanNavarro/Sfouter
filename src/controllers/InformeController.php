@@ -271,7 +271,7 @@ public function misInformes() {
         ];
 
         // 3. Renderizamos la vista específica de listado de informes
-        $this->renderizar("informe/listar", $datos);
+        $this->renderizar("informe/Listar", $datos);
 
     } catch (Exception $e) {
         $_SESSION['Error'] = "No se pudieron cargar tus informes.";
