@@ -1,13 +1,13 @@
 <?php
 namespace Sfouter\controllers; 
 
-use Sfouter\src\models\entities\UsuarioEntity;
-use Sfouter\src\controllers\BaseController;
-use Sfouter\src\models\repositories\UsuarioRepository;
-use Sfouter\src\models\repositories\JugadorRepository;
-use Sfouter\src\models\repositories\InformeRepository;
-use Sfouter\src\helpers\ValidatorHelper;
-use Sfouter\src\helpers\Session;
+use Sfouter\models\entities\UsuarioEntity;
+use Sfouter\controllers\BaseController;
+use Sfouter\models\repositories\UsuarioRepository;
+use Sfouter\models\repositories\JugadorRepository;
+use Sfouter\models\repositories\InformeRepository;
+use Sfouter\helpers\ValidatorHelper;
+use Sfouter\helpers\Session;
 
 class UsuarioController extends BaseController {
 
@@ -308,8 +308,8 @@ public function actualizarRol() {
     }
 
     if ($idModificar && $nuevoRol) {
-        // Instanciamos el repositorio si no está instanciado
-        $usuarioRepo = new \Sfouter\src\models\repositories\UsuarioRepository();
+      
+        $usuarioRepo = new UsuarioRepository();
         
         // 4. Llamamos a tu método de BD pasándole los parámetros ordenados
         $resultado = $usuarioRepo->actualizarRol($idModificar, $nuevoRol, $idAdminLogueado);
