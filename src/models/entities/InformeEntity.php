@@ -8,11 +8,13 @@ class InformeEntity {
     const POSICIONES_VALIDAS = ['Portero', 'Defensa', 'Medio', 'Delantero'];
 
     public function __construct(
-        public ?int $id = null,
+        // 1. Los que son en este caso obligatorio para que php no se confunda
         public int $idUsuario,
         public int $idJugador,
-        public ?string  $nombreJugador = null, 
         public int $idEquipo,
+        
+        public ?int $id = null,
+        public ?string  $nombreJugador = null,
         public ?DateTime $fechaInf = null, // Objeto DateTime nativo
         public ?DateTime $fechaReg = null, // Objeto DateTime nativo
         public string $posicion = 'Portero',

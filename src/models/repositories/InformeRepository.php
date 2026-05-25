@@ -20,11 +20,11 @@ class InformeRepository extends BaseRepository {
     
     private function hidratar(array $d): InformeEntity {
         return new InformeEntity(
-            (int)$d['id'],
             (int)$d['idUsuario'],
             (int)$d['idJugador'],
-            (string)($d['nombre_jugador'] ?? 'Desconocido'),
             (int)$d['idEquipo'],
+            (int)$d['id'] ?? null,
+            (string)($d['nombre_jugador'] ?? 'Desconocido'),
             new \DateTime($d['fechaInf']), // Obligatorio según tu SQL
             $d['fechaReg'] ? new \DateTime($d['fechaReg']) : null,
             $d['posicion'],
