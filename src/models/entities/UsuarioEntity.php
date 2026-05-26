@@ -12,7 +12,7 @@ class UsuarioEntity {
         private string $apellidos = ' ',
         private string $email = ' ',
         private string $password = ' ',
-        private string $rol = 'user',
+        private string $rol = 'scout',
         private ?DateTime $fechaReg = null // Usamos la clase nativa de PHP, Lo hacemos null
     ) {}
 

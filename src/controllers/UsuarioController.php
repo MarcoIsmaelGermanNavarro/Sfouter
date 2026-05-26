@@ -93,7 +93,7 @@ $password = trim(($_POST['password']));
         'apellidos' => $apellidos, 
         'email' => $email,
         'password' => password_hash($password, PASSWORD_DEFAULT), 
-        'rol'=> 'user', 
+        'rol'=> 'scout', 
         'fechaReg' => date('Y-m-d H:i:s') // Es buena práctica mandarla desde aquí
     ];
         
