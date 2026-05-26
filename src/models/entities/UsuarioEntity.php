@@ -10,9 +10,9 @@ class UsuarioEntity {
         private int $id,
         private string $nombre = ' ',
         private string $apellidos = ' ',
-        private string $rol = 'user',
         private string $email = ' ',
         private string $password = ' ',
+        private string $rol = 'user',
         private ?DateTime $fechaReg = null // Usamos la clase nativa de PHP, Lo hacemos null
     ) {}
 

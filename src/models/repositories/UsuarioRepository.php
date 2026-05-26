@@ -97,33 +97,25 @@ class UsuarioRepository extends BaseRepository {
 
     // En estre caso, traemos como parametro, los registro de los datos, que en este caso 
     // vamos a insertar. 
-    public function RegistrarUsuario($RegistroDatos) {
+public function RegistrarUsuario($RegistroDatos) {
+    try {
+        $columnas = implode(", ", array_keys($RegistroDatos));
+        $marcadores = ":" . implode(", :", array_keys($RegistroDatos));
+        $consulta = "INSERT INTO {$this->tabla} ($columnas) VALUES ($marcadores)";
 
-          try {
+        $sentencia = $this->db->prepare($consulta);
+        
+        // --- CAMBIO AQUÍ PARA DEPURAR ---
+        if (!$sentencia->execute($RegistroDatos)) {
+             $error = $sentencia->errorInfo();
+             die("ERROR SQL: " . print_r($error, true)); // Esto te dirá exactamente qué falla
+        }
+        return true;
 
-          $datos = implode(",", array_keys($RegistroDatos)); 
-          $marcadores = ":" . implode(", :", array_keys($RegistroDatos)); 
-
-
-          $consulta = "INSERT INTO {$this -> tabla}  ($datos)
-                        VALUES ($marcadores)"; 
-
-            $sentencia = $this -> db -> prepare($consulta); 
-            // Devolvemos true si se inserto correctamente. 
-            return $sentencia -> execute($RegistroDatos); 
-
-
-            
-
-          } catch (\PDOException $e) {
-
-            Errores::log("Ahi un error, en usuario Repositories, en la consulta de Registra Usuaior" . $e -> getmessage()); 
-
-            // Si hay una excepcion devolvemos false para que el controlador los sepa. 
-            return false; 
-
-          }
+    } catch (\PDOException $e) {
+        die("EXCEPCIÓN PDO: " . $e->getMessage()); // Esto te dirá si la conexión o sintaxis falla
     }
+}
 
     // Esta es la logia de si existe un emial, es decir a la hora, del registrar un usuario, es importante, 
     // comprobar, que cuando vayamos en este caso a iniciar sesion, saber que no nos pueden colar, dos, 
