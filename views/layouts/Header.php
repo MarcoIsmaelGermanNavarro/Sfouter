@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sfouter - Scouting Profesional</title>
-    <link href="<?= \Sfouter\config\Parameters::$BASE_URL ?>assets/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="<?= \Sfouter\config\Parameters::$BASE_URL ?>assets/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <link href="<?= \Sfouter\config\Parameters::getBaseUrl() ?>assets/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="<?= \Sfouter\config\Parameters::getBaseUrl() ?>assets/bootstrap/bootstrap.bundle.min.js" defer></script>
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
     <div class="container">
         <a class="navbar-brand" href="index.php">
-            <img src="<?= \Sfouter\config\Parameters::$BASE_URL ?>assets/img/Logo.png" 
+            <img src="<?= \Sfouter\config\Parameters::getBaseUrl() ?>assets/img/Logo.png" 
                  alt="Sfouter Logo" style="height: 40px; width: auto;">
         </a>
         

@@ -24,7 +24,19 @@ class Parameters {
         return realpath(__DIR__ . '/../') . '/public/uploads/Fotos/'; 
     }
 
-    public static function getRutaWeb(): string {
-        return "/uploads/Fotos/"; 
+   public static function getRutaWeb(): string {
+    // Usamos la misma lógica que en getBaseUrl()
+    $prefix = ($_SERVER['HTTP_HOST'] === 'localhost') ? "/Sfouter/public" : "";
+    return $prefix . "/uploads/Fotos/"; 
+}
+
+
+    public static function getBaseUrl() {
+        // Detectamos si estamos en local (localhost)
+        if ($_SERVER['HTTP_HOST'] === 'localhost') {
+            return "/Sfouter/public/";
+        }
+        // Si no, asumimos producción (raíz directa)
+        return "/";
     }
 }
