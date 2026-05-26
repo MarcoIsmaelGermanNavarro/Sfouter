@@ -57,6 +57,11 @@ $password = trim(($_POST['password']));
   
         $errores[] = "El nombre es obligatorio y debe tener entre 2 y 50 caracteres, y no puede contner numeros";
     }
+// 2. Validar apellidos
+      if (ValidatorHelper::estaVacio($apellidos) || !ValidatorHelper::longitud($apellidos, 2, 50) || !ValidatorHelper::soloLetras($apellidos)) {
+  
+        $errores[] = "El nombre es obligatorio y debe tener entre 2 y 50 caracteres, y no puede contner numeros";
+    }
 
     // 2. Validar Email
     if (!ValidatorHelper::emailValido($email)) {
