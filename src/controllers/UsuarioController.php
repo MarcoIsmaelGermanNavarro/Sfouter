@@ -207,7 +207,7 @@ public function guardarEdicion() {
     }
 
     // 5. ACCIÓN: Todo está validado, es seguro proceder
-    $usuarioEditado = new UsuarioEntity($id, $nombre, $apellidos, $nuevoEmail, $identidadActual->getRol());
+    $usuarioEditado = new UsuarioEntity($id, $nombre, $apellidos, $nuevoEmail, $identidadActual->getPassword(), $identidadActual->getRol());
 
     if ($repo->actualizarUsuario($usuarioEditado)) {
         $_SESSION['user'] = $usuarioEditado;
