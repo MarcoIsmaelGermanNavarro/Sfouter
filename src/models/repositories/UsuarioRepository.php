@@ -28,9 +28,9 @@ class UsuarioRepository extends BaseRepository {
                 (int)$d['id'], 
                 $d['nombre'], 
                 $d['apellidos'], 
-                $d['rol'], 
                 $d['email'], 
                 $d['password'],
+                $d['rol'], 
                 new \DateTime($d['fechaReg'])   
             ); 
 
