@@ -265,7 +265,7 @@ public function eliminarJugador() {
             if ($borrado) {
                 $_SESSION['Success'] = "El jugador se ha eliminado correctamente."; 
             } else {
-                $_SESSION['Errores'] = "Error técnico al eliminar el registro."; 
+                $_SESSION['Errores'] = "Tiene que eliminar antes, los formularios para eliminar al Jugador."; 
             }
         } else {
             $_SESSION['Errores'] = "No tienes permisos de administrador para realizar esta acción.";
