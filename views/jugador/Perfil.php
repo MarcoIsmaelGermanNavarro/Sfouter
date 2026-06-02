@@ -18,11 +18,29 @@ use Sfouter\config\Parameters;
             <h1 class="fw-bold text-dark mb-0"><?= $jugador->getNombreCompleto() ?></h1>
         </div>
         
-        <div class="col-12 col-sm-auto text-center text-sm-end">
-            <a href="index.php?controller=Informe&action=crear&idjugador=<?= $jugador->getId() ?>" 
+        <div class="col-12 col-sm-auto text-center text-sm-end d-flex flex-column gap-2">
+            <a href="index.php?controller=Informe&action=crear&idjugador=<?= $jugador->getId() ?>"
                class="btn btn-success btn-lg fw-semibold shadow-sm">
-                 Añadir Informe Técnico
+                Añadir Informe Técnico
             </a>
+            <?php if (isset($_SESSION['user']) && $_SESSION['user']->getRol() === 'admin'): ?>
+            <a href="index.php?controller=Jugador&action=editarJugador&id=<?= $jugador->getId() ?>"
+               class="btn btn-outline-secondary fw-medium">
+                ✏️ Editar jugador
+            </a>
+            <?php elseif (isset($_SESSION['user'])): ?>
+            <?php
+                $nombreJugador = $jugador->getNombreCompleto();
+                $idJugador     = $jugador->getId();
+                $asunto        = rawurlencode("Solicitud de eliminación: {$nombreJugador} (ID {$idJugador})");
+                $cuerpo        = rawurlencode("Hola,\n\nSolicito la eliminación del jugador {$nombreJugador} (ID: {$idJugador}) por el siguiente motivo:\n\n[Indica el motivo aquí]\n\nGracias.");
+                $adminEmail    = "admin@sfouter.com";
+            ?>
+            <a href="mailto:<?= $adminEmail ?>?subject=<?= $asunto ?>&body=<?= $cuerpo ?>"
+               class="btn btn-outline-danger btn-sm fw-medium">
+                Solicitar eliminación
+            </a>
+            <?php endif; ?>
         </div>
         
     </div>

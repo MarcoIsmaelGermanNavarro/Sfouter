@@ -9,8 +9,8 @@ Plataforma técnica diseñada para la centralización y profesionalización del 
 Para probar la aplicación, puedes utilizar las siguientes cuentas:
 
 | Rol | Usuario | Contraseña |
-| **Administrador** | `admin@gmail.com` | `12345678a` |
-| **Scout** | `scouter@gmail.com` | `12345678a` |
+| **Administrador** | `admin@sfouter.com` | `12345678a` |
+| **Scout** | `scout@sfouter.com` | `12345678a` |
 
 ##  Instalación
 Para instrucciones detalladas sobre cómo desplegar el proyecto en un entorno de desarrollo local, consulta el archivo [INSTALL.md].

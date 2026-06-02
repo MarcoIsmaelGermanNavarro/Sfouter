@@ -118,6 +118,17 @@ ALTER TABLE `jugador`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Volcado de datos para la tabla `usuario`
+-- Credenciales de prueba:
+--   Admin  → email: admin@sfouter.com   / password: Admin1234!
+--   Scout  → email: scout@sfouter.com   / password: Scout1234!
+--
+
+INSERT INTO `usuario` ( `nombre`, `apellidos`, `email`, `password`, `rol`) VALUES
+( 'Administrador', 'Sfouter', 'admin@sfouter.com', '$2y$12$xxuKLzfufqL4sfmwYr.oZea4wKhcGNlb1kzKFDqTOwkRFqZK6NFVa', 'admin'),
+( 'Scouter', 'Demo', 'scout@sfouter.com', '$2y$12$PI0P09h0mSQYmgh9oPhZtuE361sZ8EOgSakcznVYWmRoOtgEquCH2', 'scout');
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -150,7 +161,7 @@ ALTER TABLE `jugador`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

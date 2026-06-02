@@ -38,13 +38,17 @@
                              Ver Informes
                         </a>
                         
-                       <?php if (isset($_SESSION['user']) && $_SESSION['user']->getRol() === 'admin') : ?> 
-                        <a href="index.php?controller=Jugador&action=eliminarJugador&id=<?= $jugador->getId() ?>" 
-                         class="btn btn-link link-danger btn-sm text-decoration-none fw-medium p-0 mt-1" 
-                        onclick="return confirm('¿Estás seguro?')"> 
-                         Eliminar jugador
-                         </a>
-<?php endif; ?>
+                       <?php if (isset($_SESSION['user']) && $_SESSION['user']->getRol() === 'admin') : ?>
+                        <a href="index.php?controller=Jugador&action=editarJugador&id=<?= $jugador->getId() ?>"
+                           class="btn btn-outline-secondary btn-sm fw-semibold w-100">
+                            Editar
+                        </a>
+                        <a href="index.php?controller=Jugador&action=eliminarJugador&id=<?= $jugador->getId() ?>"
+                           class="btn btn-link link-danger btn-sm text-decoration-none fw-medium p-0 mt-1"
+                           onclick="return confirm('¿Estás seguro? Se eliminarán también sus informes.')">
+                            Eliminar jugador
+                        </a>
+                       <?php endif; ?>
                     </div>
                 </div>
                 

@@ -67,9 +67,39 @@ public function obtenerTodosParaSelect(): array {
         }
     }
 
-    // En EquipoRepository.php
-// En EquipoRepository.php
-public function buscarPorId(int $id, ?int $idUsuario = null) {
+    // Exactamente la misma logica que en JugadorRepository, pero aqui el hijo es INFORME
+    // con la columna idEquipo en lugar de idJugador.
+    // El motivo del orden es el mismo: INFORME depende de EQUIPO por clave ajena,
+    // asi que si intentasemos borrar el equipo primero la BD nos rechazaria la operacion.
+    // Con la transaccion garantizamos que si el segundo DELETE falla por cualquier razon,
+    // los informes que ya borramos se restauran automaticamente con el rollBack,
+    // y la base de datos no queda en un estado inconsistente.
+    public function eliminarConInformes(int $id): int {
+        try {
+            $this->db->beginTransaction();
+
+            // 1. Borramos primero los informes asociados al equipo (los hijos)
+            $stmtInformes = $this->db->prepare("DELETE FROM informe WHERE idEquipo = :id");
+            $stmtInformes->execute(['id' => $id]);
+            $informesBorrados = $stmtInformes->rowCount();
+
+            // 2. Ahora borramos el equipo sin problemas de FK (el padre)
+            $stmtEquipo = $this->db->prepare("DELETE FROM equipo WHERE id = :id");
+            $stmtEquipo->execute(['id' => $id]);
+
+            // Todo correcto: confirmamos los cambios de manera atomica
+            $this->db->commit();
+            return $informesBorrados;
+
+        } catch (\PDOException $e) {
+            // Algo fallo: revertimos todo, la BD queda intacta
+            $this->db->rollBack();
+            Errores::log("Error en EquipoRepository::eliminarConInformes: " . $e->getMessage());
+            return -1;
+        }
+    }
+
+    public function buscarPorId(int $id, ?int $idUsuario = null) {
     // 1. Llamamos al padre para obtener el array crudo
     $fila = parent::buscarPorId($id, $idUsuario);
 

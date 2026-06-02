@@ -33,9 +33,15 @@
                     <li class="nav-item">
                         <a class="nav-link fw-medium" href="index.php?controller=Jugador&action=FormularioCrear">Registrar Jugador</a>
                     </li>
+                    <?php if($rol === 'admin'): ?>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="index.php?controller=Equipo&action=listar">Gestionar Equipos</a>
+                    </li>
+                    <?php else: ?>
                     <li class="nav-item">
                         <a class="nav-link fw-medium" href="index.php?controller=Equipo&action=mostrarFormulario">Añadir Equipo</a>
                     </li>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link fw-medium" href="index.php?controller=Usuario&action=mostrarDashboard">Mis Informes</a>
                     </li>

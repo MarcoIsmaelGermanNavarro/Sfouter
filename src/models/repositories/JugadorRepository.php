@@ -110,6 +110,50 @@ public function cargarTodo(?int $userId = null): array {
 
     // Tenemos en este caso la consulta, de cuantos jugadores, tiene ojoedaor un usaurio
     // No ponemos null, porque no puede ser en este caso nulo. 
+    // Este metodo elimina un jugador junto con todos sus informes de manera segura.
+    // Lo hacemos con una transaccion, que es como un contrato con la base de datos:
+    // o se hace todo, o no se hace nada. Asi evitamos quedarnos a medias, es decir,
+    // con los informes borrados pero el jugador todavia en pie, o al reves.
+
+    // Por que borramos primero los informes y luego el jugador?
+    // Porque en la base de datos, INFORME tiene una clave ajena (idJugador) que apunta
+    // a JUGADOR. Si intentasemos borrar el jugador primero, la base de datos nos daria
+    // un error de integridad referencial: "no puedes borrar al padre si todavia tiene hijos".
+    // Entonces el orden correcto es siempre: borrar los hijos primero, luego el padre.
+
+    // beginTransaction() le dice a la base de datos: "ojo, voy a hacer varias consultas,
+    // no ejecutes ninguna todavia, esperame".
+    // commit() le dice: "todo ha ido bien, confirma los cambios".
+    // rollBack() le dice: "algo ha fallado, deshaz todo como si no hubiera pasado nada".
+
+    // rowCount() nos devuelve cuantas filas ha afectado el DELETE de informes,
+    // asi podemos decirle al usaurio cuantos informes se han borrado junto al jugador.
+    // Si devuelve -1 es que algo salio mal y el rollBack ya ha dejado la BD intacta.
+    public function eliminarConInformes(int $id): int {
+        try {
+            $this->db->beginTransaction();
+
+            // 1. Primero borramos los informes que pertenecen a este jugador (los hijos)
+            $stmtInformes = $this->db->prepare("DELETE FROM informe WHERE idJugador = :id");
+            $stmtInformes->execute(['id' => $id]);
+            $informesBorrados = $stmtInformes->rowCount();
+
+            // 2. Ahora ya podemos borrar el jugador sin que la FK se queje (el padre)
+            $stmtJugador = $this->db->prepare("DELETE FROM jugador WHERE id = :id");
+            $stmtJugador->execute(['id' => $id]);
+
+            // Si llegamos aqui, todo ha ido bien: confirmamos los dos DELETEs a la vez
+            $this->db->commit();
+            return $informesBorrados;
+
+        } catch (\PDOException $e) {
+            // Algo ha fallado: deshacemos todo, la BD queda exactamente como estaba
+            $this->db->rollBack();
+            Errores::log("Error en JugadorRepository::eliminarConInformes: " . $e->getMessage());
+            return -1;
+        }
+    }
+
     public function numeroJugadores(int $idUsuario) {
 
     

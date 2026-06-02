@@ -82,14 +82,135 @@ public function guardar() {
     $EquipoGuardar = $EquipoRepo->insertar($datosParaInsertar); 
 
     if ($EquipoGuardar) {
-        unset($_SESSION['Formulario']); 
+        unset($_SESSION['Formulario']);
         unset($_SESSION['Errores']);
-        $_SESSION['Success'] = 'Se ha insertado el equipo correctamente.'; 
-        header("Location: index.php?controller=Home&action=index"); 
+        $_SESSION['Success'] = 'Se ha insertado el equipo correctamente.';
+        header("Location: index.php?controller=Equipo&action=listar");
     } else {
         $_SESSION['Errores'] = ['Lo siento, ha ocurrido un error al realizar la inserción.'];
-        header("Location: index.php?controller=Equipo&action=mostrarFormulario"); 
+        header("Location: index.php?controller=Equipo&action=mostrarFormulario");
     }
-    exit; 
+    exit;
+}
+
+public function listar() {
+    $this->isAdmin();
+
+    $equipoRepo = new EquipoRepository();
+    $equipos = $equipoRepo->obtenerTodosParaSelect();
+
+    $errores = $_SESSION['Errores'] ?? [];
+    $success = $_SESSION['Success'] ?? null;
+    unset($_SESSION['Errores'], $_SESSION['Success']);
+
+    $this->renderizar("equipo/Listar", [
+        'titulo'  => 'Gestión de Equipos',
+        'equipos' => $equipos,
+        'errores' => $errores,
+        'success' => $success,
+    ]);
+}
+
+public function editar() {
+    $this->isAdmin();
+
+    $id = $_GET['id'] ?? null;
+    if (!$id) {
+        header("Location: index.php?controller=Equipo&action=listar");
+        exit;
+    }
+
+    $equipoRepo = new EquipoRepository();
+    $equipo = $equipoRepo->buscarPorId((int)$id);
+
+    if (!$equipo) {
+        $_SESSION['Errores'] = ["El equipo no existe."];
+        header("Location: index.php?controller=Equipo&action=listar");
+        exit;
+    }
+
+    $errores = $_SESSION['Errores'] ?? [];
+    unset($_SESSION['Errores']);
+
+    $this->renderizar("equipo/Editar", [
+        'titulo'  => 'Editar Equipo',
+        'equipo'  => $equipo,
+        'errores' => $errores,
+    ]);
+}
+
+public function actualizar() {
+    $this->isAdmin();
+    $this->validarCsrf();
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header("Location: index.php?controller=Equipo&action=listar");
+        exit;
+    }
+
+    $id     = (int)($_POST['id'] ?? 0);
+    $nombre = ValidatorHelper::sanear($_POST['nombre'] ?? '');
+    $errores = [];
+
+    if (!$id) {
+        $_SESSION['Errores'] = ["ID inválido."];
+        header("Location: index.php?controller=Equipo&action=listar");
+        exit;
+    }
+
+    if (ValidatorHelper::estaVacio($nombre)) {
+        $errores[] = "El nombre del equipo no puede estar vacío.";
+    } elseif (!ValidatorHelper::longitud($nombre, 3, 50)) {
+        $errores[] = "El nombre debe tener entre 3 y 50 caracteres.";
+    } elseif (!ValidatorHelper::soloLetras($nombre)) {
+        $errores[] = "El nombre solo puede contener letras.";
+    }
+
+    if (!empty($errores)) {
+        $_SESSION['Errores'] = $errores;
+        header("Location: index.php?controller=Equipo&action=editar&id={$id}");
+        exit;
+    }
+
+    $equipoRepo = new EquipoRepository();
+    $equipoRepo->actualizarInfo($id, ['nombre' => $nombre]);
+
+    $_SESSION['Success'] = "Equipo actualizado correctamente.";
+    header("Location: index.php?controller=Equipo&action=listar");
+    exit;
+}
+
+public function eliminar() {
+    $this->isAdmin();
+    $this->validarCsrf();
+
+    $id = $_GET['id'] ?? null;
+    if (!$id) {
+        $_SESSION['Errores'] = ["ID no proporcionado."];
+        header("Location: index.php?controller=Equipo&action=listar");
+        exit;
+    }
+
+    $equipoRepo = new EquipoRepository();
+    $equipo = $equipoRepo->buscarPorId((int)$id);
+
+    if (!$equipo) {
+        $_SESSION['Errores'] = ["El equipo no existe."];
+        header("Location: index.php?controller=Equipo&action=listar");
+        exit;
+    }
+
+    $informesBorrados = $equipoRepo->eliminarConInformes((int)$id);
+
+    if ($informesBorrados === -1) {
+        $_SESSION['Errores'] = "Error al eliminar el equipo. Inténtalo de nuevo.";
+    } elseif ($informesBorrados === 0) {
+        $_SESSION['Success'] = "Equipo eliminado correctamente.";
+    } else {
+        $_SESSION['Success'] = "Equipo eliminado junto con {$informesBorrados} informe(s) asociado(s).";
+    }
+
+    header("Location: index.php?controller=Equipo&action=listar");
+    exit;
 }
 }

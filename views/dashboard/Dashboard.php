@@ -71,9 +71,15 @@
             <p class="text-white-50 small mb-0">Registra un jugador al instante o añade nuevos clubes para tus reportes tácticos.</p>
         </div>
         <div class="col-12 col-md-4 text-center text-md-end d-flex gap-2 justify-content-center justify-content-md-end">
+            <?php if (isset($_SESSION['user']) && $_SESSION['user']->getRol() === 'admin'): ?>
+            <a href="index.php?controller=Equipo&action=listar" class="btn btn-sm btn-outline-light px-3 fw-medium">
+                🛡️ Gestionar Equipos
+            </a>
+            <?php else: ?>
             <a href="index.php?controller=Equipo&action=mostrarFormulario" class="btn btn-sm btn-outline-light px-3 fw-medium">
                 🛡️ Añadir Equipo
             </a>
+            <?php endif; ?>
             <a href="index.php?controller=Jugador&action=listarJugadores" class="btn btn-sm btn-primary px-3 fw-bold">
                 ⚽ Buscar Jugador
             </a>

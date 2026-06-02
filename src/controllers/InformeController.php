@@ -236,14 +236,14 @@ public function eliminar() {
             if ($borradoExitoso) {
                 $_SESSION['Success'] = "Informe eliminado correctamente.";
             } else {
-                $_SESSION['Errores'] = "No se pudo eliminar el informe.";
+                $_SESSION['Errores'] = ["No se pudo eliminar el informe."];
             }
         } else {
-            $_SESSION['Errores'] = "No tienes permiso para borrar este informe.";
+            $_SESSION['Errores'] = ["No tienes permiso para borrar este informe."];
         }
 
     } catch (Exception $e) {
-        $_SESSION["Errores"] = $e->getMessage(); //
+        $_SESSION["Errores"] = [$e->getMessage()];
     }
 
     header("Location: index.php?controller=Jugador&action=verPerfil&id=$idJugador");

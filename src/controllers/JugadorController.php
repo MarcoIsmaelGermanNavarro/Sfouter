@@ -238,6 +238,127 @@ public function verPerfil() {
         'informes' => $listaInformes
     ]);
 }
+// Muestra el formulario de edición con los datos actuales del jugador
+public function editarJugador() {
+    $this->isAdmin();
+
+    $id = $_GET['id'] ?? null;
+    if (!$id) {
+        header("Location: index.php?controller=Jugador&action=listarJugadores");
+        exit;
+    }
+
+    $jugadorRepo = new JugadorRepository();
+    $jugador = $jugadorRepo->buscarPorId((int)$id);
+
+    if (!$jugador) {
+        $_SESSION['Errores'] = ["El jugador no existe."];
+        header("Location: index.php?controller=Jugador&action=listarJugadores");
+        exit;
+    }
+
+    $errores = $_SESSION['Errores'] ?? [];
+    unset($_SESSION['Errores']);
+
+    $this->renderizar("jugador/FormularioEditar", [
+        'titulo'   => 'Editar Jugador',
+        'jugador'  => $jugador,
+        'errores'  => $errores,
+    ]);
+}
+
+// Procesa el formulario de edición
+public function actualizarJugador() {
+    $this->isAdmin();
+    $this->validarCsrf();
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header("Location: index.php?controller=Jugador&action=listarJugadores");
+        exit;
+    }
+
+    $id        = (int)($_POST['id'] ?? 0);
+    $nombre    = ValidatorHelper::sanear($_POST['nombre'] ?? '');
+    $apellidos = ValidatorHelper::sanear($_POST['apellidos'] ?? '');
+    $fechaNac  = $_POST['FechaNac'] ?? '';
+    $errores   = [];
+
+    if (!$id) {
+        $_SESSION['Errores'] = ["ID inválido."];
+        header("Location: index.php?controller=Jugador&action=listarJugadores");
+        exit;
+    }
+
+    if (ValidatorHelper::estaVacio($nombre)) {
+        $errores[] = "El nombre es obligatorio.";
+    } elseif (!ValidatorHelper::longitud($nombre, 2, 50)) {
+        $errores[] = "El nombre debe tener entre 2 y 50 caracteres.";
+    } elseif (!ValidatorHelper::soloLetras($nombre)) {
+        $errores[] = "El nombre no puede contener números ni caracteres especiales.";
+    }
+
+    if (ValidatorHelper::estaVacio($apellidos)) {
+        $errores[] = "El apellido es obligatorio.";
+    } elseif (!ValidatorHelper::longitud($apellidos, 2, 50)) {
+        $errores[] = "El apellido debe tener entre 2 y 50 caracteres.";
+    } elseif (!ValidatorHelper::soloLetras($apellidos)) {
+        $errores[] = "El apellido no puede contener números ni caracteres especiales.";
+    }
+
+    if (ValidatorHelper::estaVacio($fechaNac)) {
+        $errores[] = "La fecha de nacimiento es obligatoria.";
+    } elseif (!ValidatorHelper::fechaValida($fechaNac)) {
+        $errores[] = "La fecha de nacimiento no puede ser futura.";
+    }
+
+    // Foto: opcional. Solo procesamos si el usuario sube algo nuevo.
+    $fotoArchivo = $_FILES['foto'] ?? null;
+    $hayFoto = ($fotoArchivo && $fotoArchivo['error'] !== UPLOAD_ERR_NO_FILE);
+    $nuevaFoto = null;
+
+    if ($hayFoto) {
+        $errorFoto = ValidatorHelper::validarFoto($fotoArchivo, 2);
+        if ($errorFoto !== null) {
+            $errores[] = $errorFoto;
+        }
+    }
+
+    if (!empty($errores)) {
+        $_SESSION['Errores'] = $errores;
+        header("Location: index.php?controller=Jugador&action=editarJugador&id={$id}");
+        exit;
+    }
+
+    try {
+        $datosActualizar = [
+            'nombre'    => $nombre,
+            'apellidos' => $apellidos,
+            'fechaNac'  => $fechaNac,
+        ];
+
+        if ($hayFoto) {
+            $nombreParaBd = ValidatorHelper::generarNombreSeguro($fotoArchivo['name']);
+            $rutaFisica   = Parameters::getPhysicalPath() . $nombreParaBd;
+            if (!move_uploaded_file($fotoArchivo['tmp_name'], $rutaFisica)) {
+                throw new \Exception("No se pudo guardar la imagen.");
+            }
+            $datosActualizar['foto'] = $nombreParaBd;
+        }
+
+        $jugadorRepo = new JugadorRepository();
+        $jugadorRepo->actualizarInfo($id, $datosActualizar);
+
+        $_SESSION['Success'] = "Jugador actualizado correctamente.";
+        header("Location: index.php?controller=Jugador&action=listarJugadores");
+        exit;
+
+    } catch (\Exception $e) {
+        $_SESSION['Errores'] = ["Error al actualizar: " . $e->getMessage()];
+        header("Location: index.php?controller=Jugador&action=editarJugador&id={$id}");
+        exit;
+    }
+}
+
 // Lo hacemos, en este caso es eliminar Jugador
 public function eliminarJugador() {
     $this->CheckAuth(); 
@@ -248,34 +369,36 @@ public function eliminarJugador() {
     $rol = $usuarioActivo->getRol(); 
 
     if ($id === null) {
-        $_SESSION['Errores'] = "ID de jugador no proporcionado.";
+        $_SESSION['Errores'] = ["ID de jugador no proporcionado."];
         header("Location: index.php?controller=Jugador&action=listarJugadores");
         exit;
     }
 
     try {
-        $jugadorRepo = new JugadorRepository(); 
-        $jugador = $jugadorRepo->buscarPorId($id); 
+        $jugadorRepo = new JugadorRepository();
+        $jugador = $jugadorRepo->buscarPorId((int)$id);
 
-        if ($jugador && $rol === 'admin') {
-            // Pasamos NULL como segundo parámetro porque el Admin tiene poder total
-            // y no tenemos un idUsuario asociado al jugador.
-            $borrado = $jugadorRepo->EliminarFila((int)$id, null); 
-
-            if ($borrado) {
-                $_SESSION['Success'] = "El jugador se ha eliminado correctamente."; 
-            } else {
-                $_SESSION['Errores'] = "Tiene que eliminar antes, los formularios para eliminar al Jugador."; 
-            }
+        if (!$jugador) {
+            $_SESSION['Errores'] = ["El jugador no existe."];
+        } elseif ($rol !== 'admin') {
+            $_SESSION['Errores'] = ["No tienes permisos de administrador para realizar esta acción."];
         } else {
-            $_SESSION['Errores'] = "No tienes permisos de administrador para realizar esta acción.";
+            $informesBorrados = $jugadorRepo->eliminarConInformes((int)$id);
+
+            if ($informesBorrados === -1) {
+                $_SESSION['Errores'] = ["Error al eliminar el jugador. Inténtalo de nuevo."];
+            } elseif ($informesBorrados === 0) {
+                $_SESSION['Success'] = "Jugador eliminado correctamente.";
+            } else {
+                $_SESSION['Success'] = "Jugador eliminado junto con {$informesBorrados} informe(s) asociado(s).";
+            }
         }
 
-    } catch(Exception $e) {
-        $_SESSION['Errores'] = $e->getMessage(); 
+    } catch(\Exception $e) {
+        $_SESSION['Errores'] = [$e->getMessage()];
     }
 
     header("Location: index.php?controller=Jugador&action=listarJugadores");
-    exit; 
+    exit;
 }
 }

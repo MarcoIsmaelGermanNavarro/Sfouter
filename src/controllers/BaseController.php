@@ -116,7 +116,7 @@ public function isAdmin(): void {
     // 2. Si está logueado pero NO es administrador, lo echamos de forma SEGURA al Dashboard
     // 🌟 Usamos tu método estático específico para el Admin
     if (Session::isUserAdminLogged() === false) {
-        $_SESSION['Errores'] = "Lo siento, no eres administrador. No puedes realizar dicha acción."; 
+        $_SESSION['Errores'] = ["Lo siento, no eres administrador. No puedes realizar dicha acción."];
         
         // Redirección ESTÁTICA y SEGURA a su Dashboard de Scout (Cero bucles infinitos)
         header("Location: index.php?controller=Usuario&action=mostrarDashboard"); 
