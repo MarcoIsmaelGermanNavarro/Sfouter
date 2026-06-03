@@ -120,13 +120,13 @@ ALTER TABLE `jugador`
 --
 -- Volcado de datos para la tabla `usuario`
 -- Credenciales de prueba:
---   Admin  → email: admin@sfouter.com   / password: Admin1234!
---   Scout  → email: scout@sfouter.com   / password: Scout1234!
+--   Admin  → email: admin@sfouter.com   / password: 1234567a
+--   Scout  → email: scout@sfouter.com   / password: 1234567a
 --
 
 INSERT INTO `usuario` ( `nombre`, `apellidos`, `email`, `password`, `rol`) VALUES
-( 'Administrador', 'Sfouter', 'admin@sfouter.com', '$2y$12$xxuKLzfufqL4sfmwYr.oZea4wKhcGNlb1kzKFDqTOwkRFqZK6NFVa', 'admin'),
-( 'Scouter', 'Demo', 'scout@sfouter.com', '$2y$12$PI0P09h0mSQYmgh9oPhZtuE361sZ8EOgSakcznVYWmRoOtgEquCH2', 'scout');
+( 'Administrador', 'Sfouter', 'admin@sfouter.com', '$2b$12$Y3AwgXVwp04zHYyx2CmDgu9tjxNjc42jI.7LVnoNXTCA9E11uZIP6', 'admin'),
+( 'Scouter', 'Demo', 'scout@sfouter.com', '$2b$12$.aFdYvkLI8aYyLqxdM.TYe445nTfhsBQ0PyDS4cnM/FfvDedEu8Ue', 'scout');
 
 --
 -- Indices de la tabla `usuario`
